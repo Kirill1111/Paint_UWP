@@ -1,0 +1,110 @@
+﻿<Page
+    KeyDown="Grid_KeyDown"
+    x:Class="Draw_Brush_UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Draw_Brush_UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"  >
+
+    <Page.Resources>
+        <BitmapImage x:Key="pngSpeichern16" UriSource="../Images\Line.png"/>
+        <BitmapImage x:Key="Pencil" UriSource="../Images\Pencil.png"/>
+        <BitmapImage x:Key="Eraser" UriSource="../Images\Eraser.png"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,0" >
+
+
+
+        <Canvas
+                KeyDown="Grid_KeyDown"
+Margin="0,147,300,0"
+            Background="White"
+            Name="canvas"
+PointerExited="canvas_PointerExited_1"
+            PointerPressed="canvas_PointerPressed"
+            PointerReleased="canvas_PointerExited"
+            PointerMoved="canvas_PointerMoved"  />
+
+        <Border PointerEntered="Grid_PointerMoved" HorizontalAlignment="Right" Background="White" BorderBrush="Black" BorderThickness="2" Margin="0,147,0,0" RenderTransformOrigin="0.5,0.5" Width="304" >
+            <Grid  >
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Name="text" Width="200" Text="0"  Grid.Row="0"/>
+                <Slider Value="5" Minimum="1" Name="slider" ValueChanged="slider_ValueChanged"  Maximum="64" Grid.Row="1"  Width="200"></Slider>
+            </Grid>
+        </Border>
+
+
+        <Border   PointerEntered="Grid_PointerMoved"  Background="White" BorderBrush="Black" BorderThickness="2"  Height="150" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0" >
+            <Pivot Background="White" HorizontalAlignment="Left"  VerticalAlignment="Center"    >
+                <PivotItem Background="White"   Header="Инструменты" Margin="12,0,0,0" >
+
+                    <Grid Background="White"  Name="InstrumentsGrid"
+                    HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top" Height="100">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Click="ButClick" Name="Line" Margin="12,12,12,12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
+                            <StackPanel Margin="-10,-6,-10,-6"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="75" Name="LineImage" Stretch="Fill" Source="{StaticResource pngSpeichern16}"/>
+                            </StackPanel>
+                        </Button>
+                        <Button  Click="ButClick" Name="Pencil" Margin="12,12,12,12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
+                            <StackPanel Margin="-10,-6,-10,-6"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="75" Name="PencilImage" Stretch="Fill" Source="{StaticResource Pencil}"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Click="ButClick" Name="Eraser" Margin="12,12,12,12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
+                            <StackPanel Margin="-10,-6,-10,-6"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="75" Name="EraserImage" Stretch="Fill" Source="{StaticResource Eraser}"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                </PivotItem>
+            </Pivot>
+        </Border>
+
+
+    </Grid>
+</Page>
