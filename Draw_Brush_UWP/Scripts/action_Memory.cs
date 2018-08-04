@@ -16,7 +16,7 @@ namespace Draw_Brush_UWP.Scripts
         {
             if (nextElement != null)
             {
-                list.Add(nextElement);
+                list.Add(  nextElement );
             }
 
         }

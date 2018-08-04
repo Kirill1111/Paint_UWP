@@ -1,8 +1,10 @@
 ﻿<Page
     KeyDown="Grid_KeyDown"
     x:Class="Draw_Brush_UWP.MainPage"
+    xmlns:converter="using:Draw_Brush_UWP.Scripts.Converter"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:colorInfo="using:Draw_Brush_UWP.Scripts"
     xmlns:local="using:Draw_Brush_UWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
@@ -10,6 +12,7 @@
     mc:Ignorable="d"  >
 
     <Page.Resources>
+        <colorInfo:Info_Instruments x:Key="Color"/>
         <BitmapImage x:Key="pngSpeichern16" UriSource="../Images\Line.png"/>
         <BitmapImage x:Key="Pencil" UriSource="../Images\Pencil.png"/>
         <BitmapImage x:Key="Eraser" UriSource="../Images\Eraser.png"/>
@@ -57,6 +60,9 @@ PointerExited="canvas_PointerExited_1"
 
                 <TextBlock Name="text" Width="200" Text="0"  Grid.Row="0"/>
                 <Slider Value="5" Minimum="1" Name="slider" ValueChanged="slider_ValueChanged"  Maximum="64" Grid.Row="1"  Width="200"></Slider>
+                <ColorPicker  Grid.Row="2" HorizontalAlignment="Left" Margin="20,0,20,0" Grid.RowSpan="2" VerticalAlignment="Center">
+
+                </ColorPicker>
             </Grid>
         </Border>
 

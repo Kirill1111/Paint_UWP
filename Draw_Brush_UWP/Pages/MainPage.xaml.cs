@@ -46,6 +46,8 @@ namespace Draw_Brush_UWP
 
         private List<UIElement> PencilList = new List<UIElement>();
         private List<UIElement> EraserList = new List<UIElement>();
+        private List<UIElement> EndPencilList = new List<UIElement>();
+        private List<UIElement> EndEraserList = new List<UIElement>();
 
         public void Draw(PointerRoutedEventArgs e)
         {
@@ -202,7 +204,10 @@ namespace Draw_Brush_UWP
         {
             if( TestLeftMouseClick(e))
             {
-
+                if (PencilList == null)
+                    PencilList = new List<UIElement>();
+                if (EraserList == null)
+                    EraserList = new List<UIElement>();
                 end = e.GetCurrentPoint(canvas).Position;
                 canvas.Children.Remove(line);
 
@@ -321,15 +326,25 @@ namespace Draw_Brush_UWP
         {
             if (TestLeftMouseClick(e))
             {
+                isExit = true;
+
                 switch (Scripts.Info_Instruments.typeInit)
                 {
                     case 1:
                         Scripts.action_Memory.BackDelete(EndLine);
                         Scripts.action_Memory.Next(line);
-                        isExit = true;
                         EndLine = line;
                         break;
-
+                    case 2:
+                        isPaint = false;
+                        Scripts.action_Memory.Next(PencilList);
+                        PencilList = null;
+                        break;
+                    case 3:
+                        isPaint = false;
+                        Scripts.action_Memory.Next(EraserList);
+                        EraserList = null;
+                        break;
                 }
             }
         }
