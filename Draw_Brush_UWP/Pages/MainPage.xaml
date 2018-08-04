@@ -60,7 +60,7 @@ PointerExited="canvas_PointerExited_1"
 
                 <TextBlock Name="text" Width="200" Text="0"  Grid.Row="0"/>
                 <Slider Value="5" Minimum="1" Name="slider" ValueChanged="slider_ValueChanged"  Maximum="64" Grid.Row="1"  Width="200"></Slider>
-                <ColorPicker  Grid.Row="2" HorizontalAlignment="Left" Margin="20,0,20,0" Grid.RowSpan="2" VerticalAlignment="Center">
+                <ColorPicker ColorChanged="ColorPicker_ColorChanged"  Grid.Row="2" HorizontalAlignment="Left" Margin="20,0,20,0" Grid.RowSpan="2" VerticalAlignment="Center">
 
                 </ColorPicker>
             </Grid>

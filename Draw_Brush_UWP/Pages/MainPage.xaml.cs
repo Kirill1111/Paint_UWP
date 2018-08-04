@@ -348,6 +348,11 @@ namespace Draw_Brush_UWP
                 }
             }
         }
+
+        private void ColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
+        {
+            Scripts.Info_Instruments.colorInit = sender.Color;
+        }
     }
 }
 
