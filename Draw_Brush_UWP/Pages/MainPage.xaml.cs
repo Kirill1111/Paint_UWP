@@ -42,7 +42,8 @@ namespace Draw_Brush_UWP
 
         private  int SIZE = 4;
 
-        private List<UIElement> EndLine = new List<UIElement>();
+        private Line EndLine = new Windows.UI.Xaml.Shapes.Line();
+
         private List<UIElement> PencilList = new List<UIElement>();
         private List<UIElement> EraserList = new List<UIElement>();
 
@@ -119,7 +120,7 @@ namespace Draw_Brush_UWP
         {
             PencilList = new List<UIElement>();
             EraserList = new List<UIElement>();
-            isExit = false;
+
             if (TestLeftMouseClick(e))
             {
                 start = e.GetCurrentPoint(canvas).Position;
@@ -177,6 +178,7 @@ namespace Draw_Brush_UWP
             switch (Scripts.Info_Instruments.typeInit)
             {
                 case 1:
+                    if(isExit)
                     Scripts.action_Memory.BackDelete(EndLine);
                     Scripts.action_Memory.Next(line);
                     line = null;
@@ -200,6 +202,7 @@ namespace Draw_Brush_UWP
         {
             if( TestLeftMouseClick(e))
             {
+
                 end = e.GetCurrentPoint(canvas).Position;
                 canvas.Children.Remove(line);
 
@@ -318,16 +321,15 @@ namespace Draw_Brush_UWP
         {
             if (TestLeftMouseClick(e))
             {
-                if (!isExit)
+                switch (Scripts.Info_Instruments.typeInit)
                 {
-                    switch (Scripts.Info_Instruments.typeInit)
-                    {
-                        case 1:
-                            Scripts.action_Memory.Next(line);
-                            isExit = true;
-                            EndLine.Add(line);
-                            break;
-                    }
+                    case 1:
+                        Scripts.action_Memory.BackDelete(EndLine);
+                        Scripts.action_Memory.Next(line);
+                        isExit = true;
+                        EndLine = line;
+                        break;
+
                 }
             }
         }
