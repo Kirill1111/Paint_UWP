@@ -35,6 +35,10 @@ namespace Draw_Brush_UWP.Scripts
         {
             if (list.Count >= 1)
             {
+                if (list.Count == 1)
+                {
+                    GC.Collect();
+                }
                 List<UIElement> backElement = list.ToList()[list.Count - 1];
                 list.Remove(list.ToList()[list.Count - 1]);
                 return backElement;

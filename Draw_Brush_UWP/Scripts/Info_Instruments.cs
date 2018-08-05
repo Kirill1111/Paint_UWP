@@ -22,7 +22,7 @@ namespace Draw_Brush_UWP.Scripts
 {
     class Info_Instruments
     {
-        static private Color color =Colors.Black;//цвет для рисования
+        static private Color color = Colors.Green;//цвет для рисования
         static private int type;//тип инструмента
         static private Color colorEraser = Colors.White;//цвет стирательной резинки (по умолчанию - белый 
         //, но в случае с прозрачным фоном - прозрачный)

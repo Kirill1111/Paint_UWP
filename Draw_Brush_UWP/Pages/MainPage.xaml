@@ -1,5 +1,5 @@
 ﻿<Page
-    KeyDown="Grid_KeyDown"
+    Name="page"
     x:Class="Draw_Brush_UWP.MainPage"
     xmlns:converter="using:Draw_Brush_UWP.Scripts.Converter"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -12,57 +12,54 @@
     mc:Ignorable="d"  >
 
     <Page.Resources>
+        <converter:ColorBrushConverter x:Key="Converter"/>
         <colorInfo:Info_Instruments x:Key="Color"/>
         <BitmapImage x:Key="pngSpeichern16" UriSource="../Images\Line.png"/>
         <BitmapImage x:Key="Pencil" UriSource="../Images\Pencil.png"/>
         <BitmapImage x:Key="Eraser" UriSource="../Images\Eraser.png"/>
+        <BitmapImage x:Key="Pouring" UriSource="../Images\Pouring.png"/>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,0" >
 
-
-
-        <Canvas
-                KeyDown="Grid_KeyDown"
-Margin="0,147,300,0"
+        <ScrollViewer Name="scrol" Margin="0,147,304,0" VerticalScrollMode="Auto" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Canvas     
+            Height="{Binding ActualHeight,ElementName=scrol}"
+            Width="{Binding ActualWidth,ElementName=scrol}"
             Background="White"
             Name="canvas"
 PointerExited="canvas_PointerExited_1"
             PointerPressed="canvas_PointerPressed"
             PointerReleased="canvas_PointerExited"
-            PointerMoved="canvas_PointerMoved"  />
-
+            PointerMoved="canvas_PointerMoved"  HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"  >
+            </Canvas>
+        </ScrollViewer>
         <Border PointerEntered="Grid_PointerMoved" HorizontalAlignment="Right" Background="White" BorderBrush="Black" BorderThickness="2" Margin="0,147,0,0" RenderTransformOrigin="0.5,0.5" Width="304" >
             <Grid  >
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
+                    <RowDefinition MinHeight="20"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Name="text" Width="200" Text="0"  Grid.Row="0"/>
-                <Slider Value="5" Minimum="1" Name="slider" ValueChanged="slider_ValueChanged"  Maximum="64" Grid.Row="1"  Width="200"></Slider>
-                <ColorPicker ColorChanged="ColorPicker_ColorChanged"  Grid.Row="2" HorizontalAlignment="Left" Margin="20,0,20,0" Grid.RowSpan="2" VerticalAlignment="Center">
-
-                </ColorPicker>
+                <TextBlock VerticalAlignment="Stretch"  Name="text" Width="200" Text="0"  Grid.Row="0"/>
+                <Slider VerticalAlignment="Stretch" Value="5" Minimum="1" Name="slider" ValueChanged="slider_ValueChanged"  Maximum="64" Grid.Row="1"  Width="200"></Slider>
+                <ColorPicker Color="Green" ColorChanged="ColorPicker_ColorChanged"  ColorSpectrumShape="Ring" IsColorChannelTextInputVisible="False" IsHexInputVisible="False" Grid.Row="2" Grid.RowSpan="13"></ColorPicker>
             </Grid>
         </Border>
 
@@ -105,8 +102,12 @@ PointerExited="canvas_PointerExited_1"
                                 <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="75" Name="EraserImage" Stretch="Fill" Source="{StaticResource Eraser}"/>
                             </StackPanel>
                         </Button>
+                        <Button Click="ButClick" Name="Pouring" Margin="12,12,12,12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Grid.Column="3" Grid.Row="0" >
+                            <StackPanel Margin="-10,-6,-10,-6"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="75" Name="PouringImage" Stretch="Fill" Source="{StaticResource Pouring}"/>
+                            </StackPanel>
+                        </Button>
                     </Grid>
-
                 </PivotItem>
             </Pivot>
         </Border>

@@ -40,7 +40,7 @@ namespace Draw_Brush_UWP
         private bool isPaint = false;
         private bool isExit = false;
 
-        private  int SIZE = 4;
+        private int SIZE = 4;
 
         private Line EndLine = new Windows.UI.Xaml.Shapes.Line();
 
@@ -70,20 +70,20 @@ namespace Draw_Brush_UWP
             if (TestLeftMouseClick(e))
             {
                 if (!isPaint) return;
-                    var point = e.GetCurrentPoint(canvas).Position;
-                    var line = new Line
-                    {
-                        Stroke = new SolidColorBrush(Draw_Brush_UWP.Scripts.Info_Instruments.erasercolorInit),
-                        StrokeThickness = SIZE,
-                        X1 = start.X,
-                        Y1 = start.Y,
-                        X2 = point.X,
-                        Y2 = point.Y,
-                        StrokeStartLineCap = PenLineCap.Round,
-                        StrokeEndLineCap = PenLineCap.Round
-                    };
-                    start = point;
-                    canvas.Children.Add(line);
+                var point = e.GetCurrentPoint(canvas).Position;
+                var line = new Line
+                {
+                    Stroke = new SolidColorBrush(Draw_Brush_UWP.Scripts.Info_Instruments.erasercolorInit),
+                    StrokeThickness = SIZE,
+                    X1 = start.X,
+                    Y1 = start.Y,
+                    X2 = point.X,
+                    Y2 = point.Y,
+                    StrokeStartLineCap = PenLineCap.Round,
+                    StrokeEndLineCap = PenLineCap.Round
+                };
+                start = point;
+                canvas.Children.Add(line);
 
                 EraserList.Add(line);
             }
@@ -94,19 +94,19 @@ namespace Draw_Brush_UWP
             if (TestLeftMouseClick(e))
             {
                 if (!isPaint) return;
-                    var point = e.GetCurrentPoint(canvas).Position;
-                    var line = new Line
-                    {
-                        Stroke = new SolidColorBrush(Scripts.Info_Instruments.colorInit),
-                        StrokeThickness = SIZE,
-                        X1 = start.X,
-                        Y1 = start.Y,
-                        X2 = point.X,
-                        Y2 = point.Y,
-                        StrokeStartLineCap = PenLineCap.Round,
-                        StrokeEndLineCap = PenLineCap.Round
-                    };
-                    start = point;
+                var point = e.GetCurrentPoint(canvas).Position;
+                var line = new Line
+                {
+                    Stroke = new SolidColorBrush(Scripts.Info_Instruments.colorInit),
+                    StrokeThickness = SIZE,
+                    X1 = start.X,
+                    Y1 = start.Y,
+                    X2 = point.X,
+                    Y2 = point.Y,
+                    StrokeStartLineCap = PenLineCap.Round,
+                    StrokeEndLineCap = PenLineCap.Round
+                };
+                start = point;
                 canvas.Children.Add(line);
                 PencilList.Add(line);
             }
@@ -115,7 +115,13 @@ namespace Draw_Brush_UWP
         public MainPage()
         {
             this.InitializeComponent();
-            Scripts.Info_Instruments.colorInit = Colors.Black;
+
+            ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+
+            // if you want not to have any window smaller than this size...
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1280, 720));
+            Window.Current.CoreWindow.KeyDown += Grid_KeyDown;
         }
 
         private void canvas_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -126,8 +132,9 @@ namespace Draw_Brush_UWP
             if (TestLeftMouseClick(e))
             {
                 start = e.GetCurrentPoint(canvas).Position;
-                    end = start;
-                       line = null;
+                end = start;
+                line = null;
+ 
                 switch (Scripts.Info_Instruments.typeInit)
                 {
                     case 2:
@@ -166,7 +173,7 @@ namespace Draw_Brush_UWP
                         };
                         canvas.Children.Add(line2);
 
-                       EraserList.Add(line2);
+                        EraserList.Add(line2);
                         break;
                 }
             }
@@ -180,8 +187,8 @@ namespace Draw_Brush_UWP
             switch (Scripts.Info_Instruments.typeInit)
             {
                 case 1:
-                    if(isExit)
-                    Scripts.action_Memory.BackDelete(EndLine);
+                    if (isExit)
+                        Scripts.action_Memory.BackDelete(EndLine);
                     Scripts.action_Memory.Next(line);
                     line = null;
                     break;
@@ -202,7 +209,7 @@ namespace Draw_Brush_UWP
 
         private void canvas_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            if( TestLeftMouseClick(e))
+            if (TestLeftMouseClick(e))
             {
                 if (PencilList == null)
                     PencilList = new List<UIElement>();
@@ -276,19 +283,19 @@ namespace Draw_Brush_UWP
 
             StackPanel myImage3 = Scripts.controls_Image.Create(but.Name, "Active");
             but.Content = myImage3;
-            Scripts.controls_Image.UnActive(Name,InstrumentsGrid);
+            Scripts.controls_Image.UnActive(Name, InstrumentsGrid);
         }
 
         private void slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             text.Text = slider.Value.ToString();
-            SIZE =(int)slider.Value;
+            SIZE = (int)slider.Value;
         }
 
         private void Grid_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            if(isPaint == true)
-            isPaint = false;
+            if (isPaint == true)
+                isPaint = false;
             Debug.WriteLine("1");
         }
 
@@ -307,11 +314,11 @@ namespace Draw_Brush_UWP
             return false;
         }
 
-        private void Grid_KeyDown(object sender, KeyRoutedEventArgs e)
+        private void Grid_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
             var ctrl = Window.Current.CoreWindow.GetKeyState(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down);
 
-            if (ctrl && e.Key ==  Windows.System.VirtualKey.C)
+            if (ctrl && args.VirtualKey == Windows.System.VirtualKey.Z)
             {
                 List<UIElement> UI = Scripts.action_Memory.Back();
 
@@ -353,6 +360,14 @@ namespace Draw_Brush_UWP
         {
             Scripts.Info_Instruments.colorInit = sender.Color;
         }
+
+        private void InkToolbar_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            text.Text = slider.Value.ToString();
+            SIZE = (int)slider.Value;
+        }
+
     }
+
 }
 
